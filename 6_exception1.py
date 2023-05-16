@@ -10,19 +10,21 @@
     
 """
 
+
 def hello_user():
     """
     Замените pass на ваш код
     """
     while True:
         try:
-          answer = input("Как дела? ")
-          if answer == "Хорошо":
-              break
+            answer = input("Как дела? ")
+            if answer == "Хорошо":
+                break
         except KeyboardInterrupt:
-          print()
-          print("Пока!")
-          break
-    
+            print()
+            print("Пока!")
+            break
+
+
 if __name__ == "__main__":
     hello_user()
