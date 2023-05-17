@@ -47,28 +47,25 @@ def planet_where(update, context):
         update.message.reply_text(reply)
         return
 
-    planet_obj = None
-    if planet == "Mercury":
-        planet_obj = ephem.Mercury()
-    elif planet == "Venus":
-        planet_obj = ephem.Venus()
-    elif planet == "Mars":
-        planet_obj = ephem.Mars()
-    elif planet == "Jupiter":
-        planet_obj = ephem.Jupiter()
-    elif planet == "Saturn":
-        planet_obj = ephem.Saturn()
-    elif planet == "Uranus":
-        planet_obj = ephem.Uranus()
-    elif planet == "Neptune":
-        planet_obj = ephem.Neptune()
+    planet_constructors = {
+        "Mercury": ephem.Mercury,
+        "Venus": ephem.Venus,
+        "Mars": ephem.Mars,
+        "Jupiter": ephem.Jupiter,
+        "Saturn": ephem.Saturn,
+        "Uranus": ephem.Uranus,
+        "Neptune": ephem.Neptune,
+    }
 
-    if planet_obj:
+    planet_constructor = planet_constructors.get(planet, None)
+
+    if planet_constructor:
+        planet_obj = planet_constructor()
         planet_obj.compute(date.today())
         planets_constellation = ephem.constellation(planet_obj)
         reply = f"{planet} в созвездии {planets_constellation[1]}"
     else:
-        reply = "Не знаю планеты такой"
+        reply = "Не знаю планеты такой."
 
     update.message.reply_text(reply)
 
