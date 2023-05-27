@@ -17,7 +17,7 @@
 
 
 def strings_compare(s1, s2):
-    if type(s1) != str or type(s2) != str:
+    if not isinstance(s1, str) or not isinstance(s2, str):
         return 0
     if s1 == s2:
         return 1
